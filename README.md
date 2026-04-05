@@ -2,7 +2,7 @@
 
 A modern, responsive web application for easy access to FTP servers and Live TV streaming links. Built with a minimalistic dark blue theme, designed for users of all ages.
 
-## 👉 https://mkimranatif.github.io/Dot-Internet-ftp-access/
+## 👉 [https://mkimranatif.github.io/Dot-Internet-ftp-access/](https://mkimranatif.github.io/Dot-Internet-FTP-Access/)
 
 ## ⚠️ Disclaimer
 
