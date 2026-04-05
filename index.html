@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTP & Live TV Hub</title>
+    <meta name="description" content="Your entertainment gateway for FTP servers and Live TV">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { margin: 0; padding: 0; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState } = React;
+
+        function LinkHub() {
+          const [activeSection, setActiveSection] = useState('ftp');
+
+          const ftpData = [
+            {
+              title: "DOT INTERNET FTP SERVER",
+              links: [
+                { name: "DFLIX (Dot Internet)", url: "http://dflix.live" },
+                { name: "PLAY.DFLIX", url: "http://play.dflix.live" },
+                { name: "CDN.DFLIX", url: "http://cdn.dflix.live:5050" },
+                { name: "FS.DFLIX", url: "http://fs.dflix.live" },
+                { name: "STREAM.DFLIX", url: "http://stream.dflix.live:8096" }
+              ]
+            },
+            {
+              title: "Circle FTP",
+              links: [
+                { name: "CIRCLE FTP", url: "http://circleftp.net" },
+                { name: "NEW CIRCLE FTP", url: "http://new.circleftp.net" },
+                { name: "CIRCLE FTP 4", url: "http://ftp4.circleftp.net" }
+              ]
+            },
+            {
+              title: "BDIX Servers",
+              links: [
+                { name: "CINEPLEXBD", url: "https://cineplexbd.net" },
+                { name: "DISCOVERY FTP", url: "https://dflix.discoveryftp.net" },
+                { name: "FMFTP", url: "https://fmftp.net" },
+                { name: "FMFTP (DATA)", url: "https://fmftp.net/data" },
+                { name: "ROYALFLIX", url: "http://royalflix.net" },
+                { name: "ROYALFLIX (DATA)", url: "http://royalflix.net/Data" },
+                { name: "CTG MOVIES", url: "http://ctgmovies.com" },
+                { name: "CRAZY CTG", url: "https://crazyctg.com" },
+                { name: "CTG FUN", url: "http://ftp.ctgfun.com" },
+                { name: "103.225.94.27 (MEDIA)", url: "http://103.225.94.27/mediaserver" },
+                { name: "103.225.94.27 (INFO)", url: "http://103.225.94.27/Infobase" },
+                { name: "NOW HD TIME", url: "https://nowhdtime.com.bd" },
+                { name: "ROARZONE", url: "https://play.roarzone.info" },
+                { name: "BINUDON", url: "http://bdix.binudon.com" },
+                { name: "JELLYFIN", url: "http://182.252.81.180:8096", note: "User: vibe | Pass: 121121" },
+                { name: "FANUSH", url: "http://103.132.95.221:8096", note: "User: pcl | Pass: pcl" }
+              ]
+            },
+            {
+              title: "Website & Apps",
+              links: [
+                { name: "Moviebox", url: "http://moviebox.id" },
+                { name: "MLWBD", url: "https://mlwbd.is" },
+                { name: "MovieNestBD", url: "https://movienestbd.page" },
+                { name: "MovieLinkBD", url: "https://movielinkbd.com" }
+              ]
+            }
+          ];
+
+          const liveTvData = [
+            {
+              title: "Live TV",
+              links: [
+                { name: "IPTVIDN", url: "http://iptvidn.com" },
+                { name: "BDIPTV", url: "http://tv.bdiptv.net" },
+                { name: "TV.DFLIX", url: "http://tv.dflix.live" },
+                { name: "MEDIAIPTV", url: "http://mediaiptv.net" },
+                { name: "PLEX TV", url: "https://watch.plex.tv/" },
+                { name: "MovieNestBD TV", url: "https://tv.movienestbd.site" },
+                { name: "JAGOBD", url: "https://www.jagobd.com" },
+                { name: "TOFFEE", url: "https://toffeelive.com/en/rail/generic/editorial-dynamic/73787cc0b75e9f6be6afccc76cb68e1b" }
+              ]
+            },
+            {
+              title: "Apps",
+              links: [
+                { name: "SPORTZFY", url: "https://sportzfy.com/" },
+                { name: "HDSTREAMZ", url: "https://hdstreamz.pro" },
+                { name: "CRICFY", url: "https://cricfy.net" },
+                { name: "IPTVIDN", url: "https://app.iptvidn.xyz" }
+              ]
+            }
+          ];
+
+          const LinkCard = ({ name, url, note }) => (
+            React.createElement('a', {
+              href: url,
+              target: "_blank",
+              rel: "noopener noreferrer",
+              className: "group relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-4 hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300"
+            },
+              React.createElement('div', { className: "flex items-center justify-between gap-3" },
+                React.createElement('div', { className: "flex-1 min-w-0" },
+                  React.createElement('h3', { className: "text-sm font-semibold text-slate-100 truncate mb-1" }, name),
+                  React.createElement('p', { className: "text-xs text-slate-400 truncate" }, url),
+                  note && React.createElement('p', { className: "text-xs text-blue-400 mt-1" }, note)
+                ),
+                React.createElement('svg', {
+                  className: "w-4 h-4 text-slate-400 group-hover:text-blue-400 transition-colors flex-shrink-0",
+                  fill: "none",
+                  stroke: "currentColor",
+                  viewBox: "0 0 24 24"
+                },
+                  React.createElement('path', {
+                    strokeLinecap: "round",
+                    strokeLinejoin: "round",
+                    strokeWidth: 2,
+                    d: "M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  })
+                )
+              )
+            )
+          );
+
+          const Section = ({ data }) => (
+            React.createElement('div', { className: "space-y-8" },
+              data.map((group, idx) =>
+                React.createElement('div', { key: idx, className: "space-y-4" },
+                  React.createElement('h2', { className: "text-lg font-bold text-blue-400 uppercase tracking-wide flex items-center gap-2" },
+                    React.createElement('div', { className: "h-1 w-8 bg-blue-500 rounded" }),
+                    group.title
+                  ),
+                  React.createElement('div', { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3" },
+                    group.links.map((link, i) =>
+                      React.createElement(LinkCard, { key: i, ...link })
+                    )
+                  )
+                )
+              )
+            )
+          );
+
+          return (
+            React.createElement('div', { className: "min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950" },
+              React.createElement('div', { className: "max-w-7xl mx-auto px-4 py-8" },
+                React.createElement('div', { className: "text-center mb-8" },
+                  React.createElement('h1', { className: "text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 mb-2" },
+                    "FTP & Live TV Hub"
+                  ),
+                  React.createElement('p', { className: "text-slate-400 text-sm" }, "For Dot Internet Users")
+                ),
+                React.createElement('div', { className: "flex justify-center mb-10" },
+                  React.createElement('div', { className: "inline-flex items-center bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 rounded-full p-1.5 shadow-xl" },
+                    React.createElement('button', {
+                      onClick: () => setActiveSection('ftp'),
+                      className: `flex items-center gap-2 px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 ${
+                        activeSection === 'ftp'
+                          ? 'bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-lg shadow-blue-500/30'
+                          : 'text-slate-400 hover:text-slate-200'
+                      }`
+                    },
+                      React.createElement('svg', { className: "w-4 h-4", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24" },
+                        React.createElement('path', { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" })
+                      ),
+                      "FTP Servers"
+                    ),
+                    React.createElement('button', {
+                      onClick: () => setActiveSection('livetv'),
+                      className: `flex items-center gap-2 px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 ${
+                        activeSection === 'livetv'
+                          ? 'bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-lg shadow-blue-500/30'
+                          : 'text-slate-400 hover:text-slate-200'
+                      }`
+                    },
+                      React.createElement('svg', { className: "w-4 h-4", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24" },
+                        React.createElement('path', { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" })
+                      ),
+                      "Live TV"
+                    )
+                  )
+                ),
+                React.createElement('div', { className: "animate-fadeIn" },
+                  activeSection === 'ftp' 
+                    ? React.createElement(Section, { data: ftpData })
+                    : React.createElement(Section, { data: liveTvData })
+                ),
+                React.createElement('div', { className: "text-center mt-16 pb-8" },
+                  React.createElement('p', { className: "text-slate-500 text-xs" }, "Disclaimer: This is a link aggregation tool. All links are publicly available. Users are responsible for ensuring they have proper authorization to access these services. The repository owner is not responsible for the content or availability of external links.")
+                )
+              ),
+              React.createElement('style', null, `
+                @keyframes fadeIn {
+                  from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                  }
+                  to {
+                    opacity: 1;
+                    transform: translateY(0);
+                  }
+                }
+                .animate-fadeIn {
+                  animation: fadeIn 0.4s ease-out;
+                }
+              `)
+            )
+          );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(React.createElement(LinkHub));
+    </script>
+</body>
+</html>
